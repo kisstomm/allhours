@@ -5,10 +5,19 @@
     <td>
       <input id="client_id"
              pInputText
-             required
              type="text"
              [(ngModel)]="clientId"
+             (ngModelChange)="onClientIdChange()"
+             [ngClass]="{'ng-invalid ng-dirty': isShowError.get('clientId')}"
       />
+    </td>
+  </tr>
+  <tr *ngIf="isShowError.get('clientId')">
+    <td></td>
+    <td>
+      <div class="mb-3">
+        <small id="client_id_error" class="p-error">Required field</small>
+      </div>
     </td>
   </tr>
   <tr>
@@ -16,15 +25,24 @@
     <td>
       <input id="client_secret"
              pInputText
-             required
              type="text"
              [(ngModel)]="clientSecret"
+             (ngModelChange)="onClientSecretChange()"
+             [ngClass]="{'ng-invalid ng-dirty': isShowError.get('clientSecret')}"
       />
+    </td>
+  </tr>
+  <tr *ngIf="isShowError.get('clientSecret')">
+    <td></td>
+    <td>
+      <div class="mb-3">
+        <small id="client_secret_error" class="p-error">Required field</small>
+      </div>
     </td>
   </tr>
 </table>
 
 <div class="mt-5">
-  <p-button label="Save" (onClick)="onSave()"></p-button> &nbsp;
+  <p-button label="Save" (onClick)="onSave()" [disabled]="!isSaveButtonEnabled()"></p-button> &nbsp;
   <p-button (onClick)="onCancel()" label="Cancel"></p-button>
 </div>
