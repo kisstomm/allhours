@@ -14,12 +14,14 @@ import { HomeComponent } from './components/home/home.component';
 import {MessagesModule} from 'primeng/messages';
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
+import { UserListComponent } from './components/user-list/user-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SettingsComponent,
-    HomeComponent
+    HomeComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
