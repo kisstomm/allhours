@@ -6,6 +6,8 @@
       <input id="client_id"
              pInputText
              type="text"
+             [size]="45"
+             placeholder="Type Client ID"
              [(ngModel)]="clientId"
              (ngModelChange)="onClientIdChange()"
              [ngClass]="{'ng-invalid ng-dirty': isShowError.get('clientId')}"
@@ -26,6 +28,8 @@
       <input id="client_secret"
              pInputText
              type="text"
+             [size]="45"
+             placeholder="Type Client secret"
              [(ngModel)]="clientSecret"
              (ngModelChange)="onClientSecretChange()"
              [ngClass]="{'ng-invalid ng-dirty': isShowError.get('clientSecret')}"
