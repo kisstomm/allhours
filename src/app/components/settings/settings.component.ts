@@ -20,14 +20,15 @@ export class SettingsComponent {
   onSave() {
     try {
       this.saveDataToLocalStorage();
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Settings saved' });
+      this.messageService.add({ severity: 'success', summary: 'Settings saved', detail: '' });
     } catch (e) {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error during save settings' });
+      this.messageService.add({ severity: 'error', summary: 'Error during save settings', detail: '' });
     }
   }
 
   onCancel() {
     this.router.navigate(['/']);
+    this.messageService.add({ severity: 'info', summary: 'Settings restored', detail: '' });
   }
 
   private saveDataToLocalStorage() {
