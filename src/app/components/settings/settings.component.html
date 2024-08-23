@@ -1,0 +1,52 @@
+<h1>Settings</h1>
+<table class="mt-5">
+  <tr>
+    <td>Client ID</td>
+    <td>
+      <input id="client_id"
+             pInputText
+             type="text"
+             [size]="45"
+             placeholder="Type Client ID"
+             [(ngModel)]="clientId"
+             (ngModelChange)="onClientIdChange()"
+             [ngClass]="{'ng-invalid ng-dirty': isShowError.get('clientId')}"
+      />
+    </td>
+  </tr>
+  <tr *ngIf="isShowError.get('clientId')">
+    <td></td>
+    <td>
+      <div class="mb-3">
+        <small id="client_id_error" class="p-error">Required field</small>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>Client secret</td>
+    <td>
+      <input id="client_secret"
+             pInputText
+             type="text"
+             [size]="45"
+             placeholder="Type Client secret"
+             [(ngModel)]="clientSecret"
+             (ngModelChange)="onClientSecretChange()"
+             [ngClass]="{'ng-invalid ng-dirty': isShowError.get('clientSecret')}"
+      />
+    </td>
+  </tr>
+  <tr *ngIf="isShowError.get('clientSecret')">
+    <td></td>
+    <td>
+      <div class="mb-3">
+        <small id="client_secret_error" class="p-error">Required field</small>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<div class="mt-5">
+  <p-button label="Save" icon="pi pi-check" (onClick)="onSave()" [disabled]="!isSaveButtonEnabled()"></p-button> &nbsp;
+  <p-button (onClick)="onCancel()" icon="pi pi-times" label="Cancel"></p-button>
+</div>
