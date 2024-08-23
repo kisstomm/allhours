@@ -11,6 +11,9 @@ import {InputTextModule} from "primeng/inputtext";
 import {FormsModule} from "@angular/forms";
 import {MenubarModule} from "primeng/menubar";
 import { HomeComponent } from './components/home/home.component';
+import {MessagesModule} from 'primeng/messages';
+import {ToastModule} from "primeng/toast";
+import {MessageService} from "primeng/api";
 
 @NgModule({
   declarations: [
@@ -25,9 +28,13 @@ import { HomeComponent } from './components/home/home.component';
     ButtonModule,
     InputTextModule,
     FormsModule,
-    MenubarModule
+    MenubarModule,
+    MessagesModule,
+    ToastModule
   ],
-  providers: [],
+  providers: [
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
