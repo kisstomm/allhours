@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import {InputTextModule} from "primeng/inputtext";
 import {FormsModule} from "@angular/forms";
+import {MenubarModule} from "primeng/menubar";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {FormsModule} from "@angular/forms";
     AppRoutingModule,
     ButtonModule,
     InputTextModule,
-    FormsModule
+    FormsModule,
+    MenubarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
