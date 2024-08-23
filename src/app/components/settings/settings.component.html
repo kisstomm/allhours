@@ -1,0 +1,27 @@
+<h1>Settings</h1>
+<table class="mt-5">
+  <tr>
+    <td>Client ID</td>
+    <td>
+      <input id="client_id"
+             pInputText
+             required
+             type="text"
+             [(ngModel)]="clientId"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td>Client secret</td>
+    <td>
+      <input id="client_secret"
+             pInputText
+             required
+             type="text"
+             [(ngModel)]="clientSecret"
+      />
+    </td>
+  </tr>
+</table>
+
+<p-button label="Save" (onClick)="onSave()"></p-button>
