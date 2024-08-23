@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-settings',
@@ -9,16 +10,17 @@ export class SettingsComponent {
   clientId: string;
   clientSecret: string;
 
-  constructor() {
+  constructor(private router: Router) {
     this.clientId = localStorage.getItem('clientId') || "";
     this.clientSecret = localStorage.getItem('clientSecret') || "";
   }
 
   onSave() {
-    console.log(this.clientId);
-    console.log(this.clientSecret);
-
     localStorage.setItem('clientId', this.clientId);
     localStorage.setItem('clientSecret', this.clientSecret);
+  }
+
+  onCancel() {
+    this.router.navigate(['/']);
   }
 }
