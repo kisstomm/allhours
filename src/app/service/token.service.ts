@@ -44,4 +44,10 @@ export class TokenService {
   saveToken(tokenDto: TokenDto) {
     localStorage.setItem('token', tokenDto.access_token ?? "");
   }
+
+  removeToken() {
+    localStorage.removeItem('token');
+  }
+
+
 }

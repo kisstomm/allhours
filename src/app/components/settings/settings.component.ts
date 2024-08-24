@@ -69,14 +69,24 @@ export class SettingsComponent {
   }
 
   onAuth() {
-    this.tokenService.getBearerToken().subscribe({
-      next: response => {
-        this.tokenService.saveToken(response);
-        this.messageService.add({severity: 'success', summary: 'Authenticated successfully', detail: ''});
-      },
-      error: err => {
-        this.messageService.add({severity: 'error', summary: 'Error during authenticate', detail: ''});
+    this.validateFields();
+    if (this.isSaveButtonEnabled()) {
+      try {
+        this.saveDataToLocalStorage();
+        this.tokenService.getBearerToken().subscribe({
+          next: response => {
+            this.tokenService.saveToken(response);
+            this.messageService.add({severity: 'success', summary: 'Authenticated successfully', detail: ''});
+          },
+          error: err => {
+            this.tokenService.removeToken();
+            this.messageService.add({severity: 'error', summary: 'Error during authentication', detail: ''});
+          }
+        })
+      } catch (e) {
+        this.tokenService.removeToken();
+        this.messageService.add({severity: 'error', summary: 'Error during authentication', detail: ''});
       }
-    })
+    }
   }
 }
