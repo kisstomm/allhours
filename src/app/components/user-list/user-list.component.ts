@@ -22,7 +22,12 @@ export class UserListComponent {
         this.items = data;
       },
       error: err => {
-        this.messageService.add({severity: 'error', summary: 'Error during load users', detail: ''});
+        console.log(err);
+        let detail: string = '';
+        if(err.status === 401) {
+          detail = 'Authentication needed';
+        }
+        this.messageService.add({severity: 'error', summary: 'Error during load users', detail});
       }
     })
   }
