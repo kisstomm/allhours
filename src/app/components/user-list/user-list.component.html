@@ -10,10 +10,10 @@
 >
   <ng-template pTemplate="header">
     <tr>
-      <th>Id</th>
-      <th>FirstName</th>
-      <th>LastName</th>
-      <th>Email</th>
+      <th pSortableColumn="Id">Id <p-sortIcon field="Id" /></th>
+      <th pSortableColumn="FirstName">FirstName <p-sortIcon field="FirstName" /></th>
+      <th pSortableColumn="LastName">LastName <p-sortIcon field="LastName" /></th>
+      <th pSortableColumn="Email">Email <p-sortIcon field="Email" /></th>
     </tr>
   </ng-template>
   <ng-template let-item pTemplate="body">
