@@ -16,6 +16,7 @@ import {MessagesModule} from 'primeng/messages';
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
 import {UserListComponent} from './components/user-list/user-list.component';
+import {TableModule} from "primeng/table";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {UserListComponent} from './components/user-list/user-list.component';
     FormsModule,
     MenubarModule,
     MessagesModule,
-    ToastModule
+    ToastModule,
+    TableModule
   ],
   providers: [
     MessageService
