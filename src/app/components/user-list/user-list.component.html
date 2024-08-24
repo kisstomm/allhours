@@ -15,6 +15,24 @@
       <th pSortableColumn="LastName">LastName <p-sortIcon field="LastName" /></th>
       <th pSortableColumn="Email">Email <p-sortIcon field="Email" /></th>
     </tr>
+    <tr>
+      <th></th>
+      <th>
+        <p-columnFilter
+          field="FirstName"
+          placeholder="Search by FirstName"
+          type="text"
+        />
+      </th>
+      <th>
+        <p-columnFilter
+          field="LastName"
+          placeholder="Search by LastName"
+          type="text"
+        />
+      </th>
+      <th></th>
+    </tr>
   </ng-template>
   <ng-template let-item pTemplate="body">
     <tr>
