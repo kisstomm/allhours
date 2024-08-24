@@ -40,4 +40,8 @@ export class TokenService {
     body.set('grant_type', 'client_credentials');
     return this.httpClient.post<TokenDto>("/connect/token", body, { headers: this.httpOptions.headers });
   }
+
+  saveToken(tokenDto: TokenDto) {
+    localStorage.setItem('token', tokenDto.access_token ?? "");
+  }
 }

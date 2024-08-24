@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {MessageService} from "primeng/api";
+import {TokenService} from "../../service/token.service";
 
 @Component({
   selector: 'app-settings',
@@ -12,7 +13,7 @@ export class SettingsComponent {
   clientSecret: string;
   isShowError: Map<string, boolean>;
 
-  constructor(private router: Router, private messageService: MessageService) {
+  constructor(private tokenService: TokenService, private router: Router, private messageService: MessageService) {
     this.clientId = localStorage.getItem('clientId') || "";
     this.clientSecret = localStorage.getItem('clientSecret') || "";
     this.isShowError = new Map<string, boolean>;
@@ -65,5 +66,17 @@ export class SettingsComponent {
   private saveDataToLocalStorage() {
     localStorage.setItem('clientId', this.clientId);
     localStorage.setItem('clientSecret', this.clientSecret);
+  }
+
+  onAuth() {
+    this.tokenService.getBearerToken().subscribe({
+      next: response => {
+        this.tokenService.saveToken(response);
+        this.messageService.add({severity: 'success', summary: 'Authenticated successfully', detail: ''});
+      },
+      error: err => {
+        this.messageService.add({severity: 'error', summary: 'Error during authenticate', detail: ''});
+      }
+    })
   }
 }
