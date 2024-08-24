@@ -30,49 +30,13 @@ export class SettingsComponent {
     this.isShowError.set('clientSecret', isError);
   }
 
-  onSave() {
-    this.validateFields();
-    if (this.isSaveButtonEnabled()) {
-      try {
-        this.saveDataToLocalStorage();
-        this.messageService.add({severity: 'success', summary: 'Settings saved', detail: ''});
-        this.router.navigate(['/']);
-      } catch (e) {
-        this.messageService.add({severity: 'error', summary: 'Error during save settings', detail: ''});
-      }
-    }
-  }
-
-  onCancel() {
-    this.messageService.add({ severity: 'info', summary: 'Settings restored', detail: '' });
-    this.router.navigate(['/']);
-  }
-
-  isSaveButtonEnabled(): boolean {
-    for (let [key, isError] of this.isShowError) {
-      if (isError) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  private validateFields() {
-    this.onClientIdChange();
-    this.onClientSecretChange();
-  }
-
-  private saveDataToLocalStorage() {
-    localStorage.setItem('clientId', this.clientId);
-    localStorage.setItem('clientSecret', this.clientSecret);
-  }
-
   onAuth() {
     this.validateFields();
-    if (this.isSaveButtonEnabled()) {
+    if (!this.hasFieldsErrors()) {
       try {
-        this.saveDataToLocalStorage();
+        this.tokenService.saveClientId(this.clientId);
+        this.tokenService.saveClientSecret(this.clientSecret);
+
         this.tokenService.getBearerToken().subscribe({
           next: response => {
             this.tokenService.saveToken(response);
@@ -89,4 +53,25 @@ export class SettingsComponent {
       }
     }
   }
+
+  onCancel() {
+    this.messageService.add({ severity: 'info', summary: 'Settings restored', detail: '' });
+    this.router.navigate(['/']);
+  }
+
+  hasFieldsErrors(): boolean {
+    for (let [key, isError] of this.isShowError) {
+      if (isError) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  private validateFields() {
+    this.onClientIdChange();
+    this.onClientSecretChange();
+  }
+
 }

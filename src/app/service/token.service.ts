@@ -41,6 +41,14 @@ export class TokenService {
     return this.httpClient.post<TokenDto>("/connect/token", body, { headers: this.httpOptions.headers });
   }
 
+  saveClientId(clientId: string) {
+    return localStorage.setItem('clientId', clientId);
+  }
+
+  saveClientSecret(clientSecret: string) {
+    return localStorage.setItem('clientSecret', clientSecret);
+  }
+
   saveToken(tokenDto: TokenDto) {
     localStorage.setItem('token', tokenDto.access_token ?? "");
   }
