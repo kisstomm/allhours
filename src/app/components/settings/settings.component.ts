@@ -14,8 +14,8 @@ export class SettingsComponent {
   isShowError: Map<string, boolean>;
 
   constructor(private tokenService: TokenService, private router: Router, private messageService: MessageService) {
-    this.clientId = localStorage.getItem('clientId') || "";
-    this.clientSecret = localStorage.getItem('clientSecret') || "";
+    this.clientId = this.tokenService.loadClientId();
+    this.clientSecret = this.tokenService.loadClientSecret();
     this.isShowError = new Map<string, boolean>;
   }
 

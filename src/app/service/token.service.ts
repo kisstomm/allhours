@@ -23,19 +23,10 @@ export class TokenService {
     this.httpOptions.headers = this.httpOptions.headers.set('Access-Control-Allow-Origin', '*');
     this.httpOptions.headers = this.httpOptions.headers.set('Access-Control-Allow-Methods', 'HEAD,GET,POST,PUT,PATCH,DELETE,OPTIONS');
   }
-
-  getClientId() {
-    return localStorage.getItem('clientId') || "";
-  }
-
-  getClientSecret() {
-    return localStorage.getItem('clientSecret') || "";
-  }
-
   getBearerToken(): Observable<TokenDto> {
     const body = new URLSearchParams();
-    body.set('client_id', this.getClientId());
-    body.set('client_secret', this.getClientSecret());
+    body.set('client_id', this.loadClientId());
+    body.set('client_secret', this.loadClientSecret());
     body.set('scope', 'api');
     body.set('grant_type', 'client_credentials');
     return this.httpClient.post<TokenDto>("/connect/token", body, { headers: this.httpOptions.headers });
@@ -51,6 +42,18 @@ export class TokenService {
 
   saveToken(tokenDto: TokenDto) {
     localStorage.setItem('token', tokenDto.access_token ?? "");
+  }
+
+  loadClientId() {
+    return localStorage.getItem('clientId') || "";
+  }
+
+  loadClientSecret() {
+    return localStorage.getItem('clientSecret') || "";
+  }
+
+  loadToken() {
+    return localStorage.getItem('token') || "";
   }
 
   removeToken() {
