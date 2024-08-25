@@ -19,7 +19,7 @@ export class AbsenceEditComponent {
 
   absenceDefinitionList: AbsenceDefinitionDto[];
   selectedAbsenceDefinition: AbsenceDefinitionDto;
-  partialTimeFrom: any;
+  partialTimeFrom: Date;
   partialTimeTo: Date;
 
   constructor(private absenceService: AbsenceService, private absenceDefinitionService: AbsenceDefinitionService, private router: Router, private route: ActivatedRoute, private messageService: MessageService) {
@@ -28,7 +28,7 @@ export class AbsenceEditComponent {
 
     this.absenceDefinitionList = [];
     this.selectedAbsenceDefinition = new AbsenceDefinitionDto();
-    this.partialTimeFrom = 0;
+    this.partialTimeFrom = new Date();
     this.partialTimeTo = new Date();
 
     if (this.absenceId === "") {
@@ -41,9 +41,10 @@ export class AbsenceEditComponent {
   loadAbsence() {
     this.absenceService.getById(this.absenceId).subscribe({
       next: response => {
+
         this.absence = response;
-        this.partialTimeFrom = moment(this.absence.PartialTimeFrom).toDate();
-        this.partialTimeTo = moment(this.absence.PartialTimeTo).toDate();
+        this.partialTimeFrom = moment(this.absence.PartialTimeFrom?.substring(0, 19)).toDate();
+        this.partialTimeTo = moment(this.absence.PartialTimeTo?.substring(0, 19)).toDate();
 
         this.loadCurrentAbsenceDefinition();
       },
