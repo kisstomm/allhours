@@ -39,6 +39,11 @@ export class AppComponent implements OnInit {
             label: 'User create',
             icon: 'pi pi-user-plus',
             routerLink: '/user-create',
+          },
+          {
+            label: 'Add absence',
+            icon: 'pi pi-plus',
+            routerLink: '/user-absence-create',
           }
         ]
       }

@@ -18,6 +18,7 @@ import {MessageService} from "primeng/api";
 import {UserListComponent} from './components/user-list/user-list.component';
 import {TableModule} from "primeng/table";
 import { UserCreateComponent } from './components/user-create/user-create.component';
+import { UserAbsenceCreateComponent } from './components/user-absence-create/user-absence-create.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { UserCreateComponent } from './components/user-create/user-create.compon
     SettingsComponent,
     HomeComponent,
     UserListComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    UserAbsenceCreateComponent
   ],
   imports: [
     BrowserModule,
