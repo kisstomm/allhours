@@ -23,7 +23,6 @@ export class SettingsComponent {
   onClientIdChange() {
     const isError: boolean = Validator.isEmpty(this.clientId)
     this.isShowError.set('clientId', isError);
-
   }
 
   onClientSecretChange() {
