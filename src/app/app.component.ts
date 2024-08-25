@@ -25,6 +25,22 @@ export class AppComponent implements OnInit {
         label: 'Settings',
         icon: 'pi pi-cog',
         routerLink: '/settings',
+      },
+      {
+        label: 'User',
+        icon: 'pi pi-user',
+        items: [
+          {
+            label: 'User list',
+            icon: 'pi pi-users',
+            routerLink: '/user-list',
+          },
+          {
+            label: 'User create',
+            icon: 'pi pi-user-plus',
+            routerLink: '/user-create',
+          }
+        ]
       }
     ]
   }

@@ -47,6 +47,6 @@
 </table>
 
 <div class="mt-5">
-  <p-button label="Save" icon="pi pi-check" (onClick)="onSave()" [disabled]="!isSaveButtonEnabled()"></p-button> &nbsp;
+  <p-button (onClick)="onAuth()" [disabled]="hasFieldsErrors()" label="Authenticate"></p-button>&nbsp;
   <p-button (onClick)="onCancel()" icon="pi pi-times" label="Cancel"></p-button>
 </div>

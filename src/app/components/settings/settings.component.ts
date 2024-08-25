@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {MessageService} from "primeng/api";
+import {TokenService} from "../../service/token.service";
+import {Validator} from "../../helper/validator";
 
 @Component({
   selector: 'app-settings',
@@ -12,32 +14,42 @@ export class SettingsComponent {
   clientSecret: string;
   isShowError: Map<string, boolean>;
 
-  constructor(private router: Router, private messageService: MessageService) {
-    this.clientId = localStorage.getItem('clientId') || "";
-    this.clientSecret = localStorage.getItem('clientSecret') || "";
+  constructor(private tokenService: TokenService, private router: Router, private messageService: MessageService) {
+    this.clientId = this.tokenService.loadClientId();
+    this.clientSecret = this.tokenService.loadClientSecret();
     this.isShowError = new Map<string, boolean>;
   }
 
   onClientIdChange() {
-    const isError: boolean = this.clientId === "" || this.clientId === null;
+    const isError: boolean = Validator.isEmpty(this.clientId)
     this.isShowError.set('clientId', isError);
-
   }
 
   onClientSecretChange() {
-    const isError: boolean = this.clientSecret === "" || this.clientSecret === null;
+    const isError: boolean = Validator.isEmpty(this.clientSecret);
     this.isShowError.set('clientSecret', isError);
   }
 
-  onSave() {
+  onAuth() {
     this.validateFields();
-    if (this.isSaveButtonEnabled()) {
+    if (!this.hasFieldsErrors()) {
       try {
-        this.saveDataToLocalStorage();
-        this.messageService.add({severity: 'success', summary: 'Settings saved', detail: ''});
-        this.router.navigate(['/']);
+        this.tokenService.saveClientId(this.clientId);
+        this.tokenService.saveClientSecret(this.clientSecret);
+
+        this.tokenService.getBearerToken().subscribe({
+          next: response => {
+            this.tokenService.saveToken(response);
+            this.messageService.add({severity: 'success', summary: 'Authenticated successfully', detail: ''});
+          },
+          error: err => {
+            this.tokenService.removeToken();
+            this.messageService.add({severity: 'error', summary: 'Error during authentication', detail: ''});
+          }
+        })
       } catch (e) {
-        this.messageService.add({severity: 'error', summary: 'Error during save settings', detail: ''});
+        this.tokenService.removeToken();
+        this.messageService.add({severity: 'error', summary: 'Error during authentication', detail: ''});
       }
     }
   }
@@ -47,14 +59,14 @@ export class SettingsComponent {
     this.router.navigate(['/']);
   }
 
-  isSaveButtonEnabled(): boolean {
+  hasFieldsErrors(): boolean {
     for (let [key, isError] of this.isShowError) {
       if (isError) {
-        return false;
+        return true;
       }
     }
 
-    return true;
+    return false;
   }
 
   private validateFields() {
@@ -62,8 +74,4 @@ export class SettingsComponent {
     this.onClientSecretChange();
   }
 
-  private saveDataToLocalStorage() {
-    localStorage.setItem('clientId', this.clientId);
-    localStorage.setItem('clientSecret', this.clientSecret);
-  }
 }

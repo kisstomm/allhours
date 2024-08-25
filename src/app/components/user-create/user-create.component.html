@@ -1,0 +1,72 @@
+<h1>User create</h1>
+
+<table class="mt-5">
+  <tr>
+    <td>First name</td>
+    <td>
+      <input id="first_name"
+             pInputText
+             type="text"
+             placeholder="Type First name"
+             [(ngModel)]="user.FirstName"
+             (ngModelChange)="onFirstNameChange()"
+             [ngClass]="{'ng-invalid ng-dirty': isShowError.get('firstName')}"
+      />
+    </td>
+  </tr>
+  <tr *ngIf="isShowError.get('firstName')">
+    <td></td>
+    <td>
+      <div class="mb-3">
+        <small id="first_name_error" class="p-error">Required field</small>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>Last name</td>
+    <td>
+      <input id="last_name"
+             pInputText
+             type="text"
+             placeholder="Type Last name"
+             [(ngModel)]="user.LastName"
+             (ngModelChange)="onLastNameChange()"
+             [ngClass]="{'ng-invalid ng-dirty': isShowError.get('lastName')}"
+      />
+    </td>
+  </tr>
+  <tr *ngIf="isShowError.get('lastName')">
+    <td></td>
+    <td>
+      <div class="mb-3">
+        <small id="last_name_error" class="p-error">Required field</small>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td>
+      <input id="email"
+             pInputText
+             type="text"
+             placeholder="Type Email"
+             [(ngModel)]="user.Email"
+             (ngModelChange)="onEmailChange()"
+             [ngClass]="{'ng-invalid ng-dirty': isShowError.get('email')}"
+      />
+    </td>
+  </tr>
+  <tr *ngIf="isShowError.get('email')">
+    <td></td>
+    <td>
+      <div class="mb-3">
+        <small id="email_error" class="p-error">Valid email required</small>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<div class="mt-5">
+  <p-button (onClick)="onSave()" [disabled]="hasFieldsErrors()" label="Save"></p-button>&nbsp;
+  <p-button routerLink="/" icon="pi pi-times" label="Cancel"></p-button>
+</div>

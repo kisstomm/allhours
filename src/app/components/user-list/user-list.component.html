@@ -1,0 +1,51 @@
+<h1>User list</h1>
+
+<p-table
+  [value]="items"
+  [loading]="isLoading"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  [paginator]="true"
+  [rowsPerPageOptions]="[5, 10, 20]"
+  [rows]="5"
+  styleClass="p-datatable-striped"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="Id">Id <p-sortIcon field="Id" /></th>
+      <th pSortableColumn="FirstName">FirstName <p-sortIcon field="FirstName" /></th>
+      <th pSortableColumn="LastName">LastName <p-sortIcon field="LastName" /></th>
+      <th pSortableColumn="Email">Email <p-sortIcon field="Email" /></th>
+      <th>Actions</th>
+      <th><p-button routerLink="/user-create" icon="pi pi-plus" styleClass="p-button-sm"></p-button></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>
+        <p-columnFilter
+          field="FirstName"
+          placeholder="Search by FirstName"
+          type="text"
+        />
+      </th>
+      <th>
+        <p-columnFilter
+          field="LastName"
+          placeholder="Search by LastName"
+          type="text"
+        />
+      </th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template let-item pTemplate="body">
+    <tr>
+      <td>{{ item.Id }}</td>
+      <td>{{ item.FirstName }}</td>
+      <td>{{ item.LastName }}</td>
+      <td>{{ item.Email }}</td>
+      <td><p-button label="Add absence" [routerLink]="['/user-absence-create/', item.Id]" [outlined]="true"/></td>
+    </tr>
+  </ng-template>
+</p-table>
