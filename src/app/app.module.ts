@@ -24,6 +24,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {InputNumberModule} from "primeng/inputnumber";
 import {CalendarModule} from "primeng/calendar";
 import {CheckboxModule} from "primeng/checkbox";
+import { AbsenceListComponent } from './components/absence-list/absence-list.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {CheckboxModule} from "primeng/checkbox";
     HomeComponent,
     UserListComponent,
     UserCreateComponent,
-    UserAbsenceCreateComponent
+    UserAbsenceCreateComponent,
+    AbsenceListComponent
   ],
   imports: [
     BrowserModule,
