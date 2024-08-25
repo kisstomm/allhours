@@ -1,30 +1,18 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AbsenceDefinitionDto} from "../dto/AbsenceDefinitionDto";
+import {BaseService} from "./base.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AbsenceDefinitionService {
+export class AbsenceDefinitionService extends BaseService {
   baseUrl: string;
-  httpOptions: { headers: HttpHeaders, params: HttpParams, responseType: string };
 
   constructor(private httpClient: HttpClient) {
+    super();
     this.baseUrl = "https://api4.allhours.com/api/v1";
-
-    this.httpOptions = {
-      headers: new HttpHeaders(),
-      params: new HttpParams(),
-      responseType: ''
-    };
-
-    this.httpOptions.headers = this.httpOptions.headers.set('Content-Type', 'application/json');
-
-  }
-
-  loadToken() {
-    return localStorage.getItem('token') || "";
   }
 
   getAll(): Observable<AbsenceDefinitionDto[]> {

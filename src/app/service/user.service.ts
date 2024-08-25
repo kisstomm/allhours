@@ -2,29 +2,17 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserDto} from "../dto/UserDto";
+import {BaseService} from "./base.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService extends BaseService{
   baseUrl: string;
-  httpOptions: { headers: HttpHeaders, params: HttpParams, responseType: string };
 
   constructor(private httpClient: HttpClient) {
+    super();
     this.baseUrl = "https://api4.allhours.com/api/v1";
-
-    this.httpOptions = {
-      headers: new HttpHeaders(),
-      params: new HttpParams(),
-      responseType: ''
-    };
-
-    this.httpOptions.headers = this.httpOptions.headers.set('Content-Type', 'application/json');
-
-  }
-
-  loadToken() {
-    return localStorage.getItem('token') || "";
   }
 
   getAll(): Observable<UserDto[]> {
@@ -38,6 +26,8 @@ export class UserService {
   }
 
   create(user: UserDto) {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'Bearer ' + this.loadToken());
+
     const body = JSON.stringify(user);
     return this.httpClient.post<UserDto>(this.baseUrl + "/Users", body, { headers: this.httpOptions.headers });
   }

@@ -4,29 +4,17 @@ import {Observable} from "rxjs";
 import {UserDto} from "../dto/UserDto";
 import {AbsenceDto} from "../dto/AbsenceDto";
 import {AbsenceCreateDto} from "../dto/AbsenceCreateDto";
+import {BaseService} from "./base.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AbsenceService {
+export class AbsenceService extends BaseService{
   baseUrl: string;
-  httpOptions: { headers: HttpHeaders, params: HttpParams, responseType: string };
 
   constructor(private httpClient: HttpClient) {
+    super();
     this.baseUrl = "https://api4.allhours.com/api/v1";
-
-    this.httpOptions = {
-      headers: new HttpHeaders(),
-      params: new HttpParams(),
-      responseType: ''
-    };
-
-    this.httpOptions.headers = this.httpOptions.headers.set('Content-Type', 'application/json');
-
-  }
-
-  loadToken() {
-    return localStorage.getItem('token') || "";
   }
 
   getAll(): Observable<AbsenceDto[]> {
