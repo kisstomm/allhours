@@ -22,6 +22,19 @@ export class AbsenceService extends BaseService{
     return this.httpClient.get<AbsenceDto[]>(this.baseUrl + "/Absences", { headers: this.httpOptions.headers });
   }
 
+  getAllFilterAbsenceDate(filterAbsenceFrom: string, filterAbsenceTo: string): Observable<AbsenceDto[]> {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'Bearer ' + this.loadToken());
+
+    if(filterAbsenceFrom) {
+      this.httpOptions.params = new HttpParams().set('dateFrom', filterAbsenceFrom);
+    }
+    if(filterAbsenceTo) {
+      this.httpOptions.params = this.httpOptions.params.append('dateTo', filterAbsenceTo);
+    }
+
+    return this.httpClient.get<AbsenceDto[]>(this.baseUrl + "/Absences", { headers: this.httpOptions.headers, params: this.httpOptions.params });
+  }
+
   create(absence: AbsenceCreateDto) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'Bearer ' + this.loadToken());
 

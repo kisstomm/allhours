@@ -1,5 +1,36 @@
 <h1>Absences</h1>
 
+<table>
+  <tr>
+    <td>Absence from</td>
+    <td>
+      <p-calendar
+        [(ngModel)]="absenceFrom"
+        (ngModelChange)="onAbsenceFromChange()"
+        [showIcon]="true"
+        [showButtonBar]="true"
+        [showOnFocus]="false"
+        [showTime]="false"
+        dateFormat="yy.mm.dd"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td>Absence to</td>
+    <td>
+      <p-calendar
+        [(ngModel)]="absenceTo"
+        (ngModelChange)="onAbsenceToChange()"
+        [showIcon]="true"
+        [showButtonBar]="true"
+        [showOnFocus]="false"
+        [showTime]="false"
+        dateFormat="yy.mm.dd"
+      />
+    </td>
+  </tr>
+</table>
+
 <p-table
   [loading]="isLoading"
   [paginator]="true"
@@ -33,6 +64,26 @@
       <th>
         <p-button icon="pi pi-plus" routerLink="/user-create" styleClass="p-button-sm"></p-button>
       </th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>
+        <p-columnFilter
+          field="FirstName"
+          placeholder="Search by FirstName"
+          type="text"
+        />
+      </th>
+      <th>
+        <p-columnFilter
+          field="LastName"
+          placeholder="Search by LastName"
+          type="text"
+        />
+      </th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template let-item pTemplate="body">
