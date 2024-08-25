@@ -20,6 +20,7 @@ import {TableModule} from "primeng/table";
 import { UserCreateComponent } from './components/user-create/user-create.component';
 import { UserAbsenceCreateComponent } from './components/user-absence-create/user-absence-create.component';
 import {AccordionModule} from "primeng/accordion";
+import {DropdownModule} from "primeng/dropdown";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {AccordionModule} from "primeng/accordion";
     MessagesModule,
     ToastModule,
     TableModule,
-    AccordionModule
+    AccordionModule,
+    DropdownModule
   ],
   providers: [
     MessageService

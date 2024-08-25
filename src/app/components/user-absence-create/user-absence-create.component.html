@@ -49,3 +49,9 @@
     </table>
   </p-accordionTab>
 </p-accordion>
+
+<p-dropdown
+  [options]="absenceDefinitionList"
+  [(ngModel)]="selectedAbsenceDefinition"
+  optionLabel="Name"
+  placeholder="Select an Absence" />
