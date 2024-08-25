@@ -97,7 +97,6 @@ export class AbsenceEditComponent {
 
   onSave() {
     try {
-      // this.createAbsence.UserId = this.userId;
       this.absence.Timestamp = moment(new Date()).format('YYYY-MM-DDTHH:mm:ss');
       this.absence.AbsenceDefinitionId = this.selectedAbsenceDefinition.Id;
       this.absenceService.update(this.absence).subscribe({
