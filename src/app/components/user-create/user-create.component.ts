@@ -57,9 +57,7 @@ export class UserCreateComponent {
       }
     }
   }
-
-
-
+  
   hasFieldsErrors(): boolean {
     for (let [key, isError] of this.isShowError) {
       if (isError) {
