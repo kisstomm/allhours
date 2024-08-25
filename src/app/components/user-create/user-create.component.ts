@@ -29,7 +29,7 @@ export class UserCreateComponent {
   }
 
   onEmailChange() {
-    const isError: boolean = Validator.isEmpty(this.user.Email);
+    const isError: boolean = !Validator.isEmail(this.user.Email);
     this.isShowError.set('email', isError);
   }
 
