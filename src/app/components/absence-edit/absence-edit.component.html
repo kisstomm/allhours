@@ -1,5 +1,56 @@
 <h1>Absence edit</h1>
 
+<p-accordion [activeIndex]="0">
+  <p-accordionTab header="User">
+    <table>
+      <tr>
+        <td>Id</td>
+        <td>
+          <input id="id"
+                 pInputText
+                 type="text"
+                 [(ngModel)]="user.Id"
+                 [readOnly]="true"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>First name</td>
+        <td>
+          <input id="first_name"
+                 pInputText
+                 type="text"
+                 [(ngModel)]="user.FirstName"
+                 [readOnly]="true"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Last name</td>
+        <td>
+          <input id="last_name"
+                 pInputText
+                 type="text"
+                 [(ngModel)]="user.LastName"
+                 [readOnly]="true"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>
+          <input id="email"
+                 pInputText
+                 type="text"
+                 [(ngModel)]="user.Email"
+                 [readOnly]="true"
+          />
+        </td>
+      </tr>
+    </table>
+  </p-accordionTab>
+</p-accordion>
+
 <table>
   <tr>
     <td>Absence</td>

@@ -7,6 +7,8 @@ import {Validator} from "../../helper/validator";
 import {AbsenceDefinitionDto} from "../../dto/AbsenceDefinitionDto";
 import {AbsenceUpdateDto} from "../../dto/AbsenceUpdateDto";
 import {AbsenceDefinitionService} from "../../service/absence-definition.service";
+import {UserDto} from "../../dto/UserDto";
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-absence-edit',
@@ -16,15 +18,17 @@ import {AbsenceDefinitionService} from "../../service/absence-definition.service
 export class AbsenceEditComponent {
   absenceId: string;
   absence: AbsenceUpdateDto;
+  user: UserDto;
 
   absenceDefinitionList: AbsenceDefinitionDto[];
   selectedAbsenceDefinition: AbsenceDefinitionDto;
   partialTimeFrom: Date;
   partialTimeTo: Date;
 
-  constructor(private absenceService: AbsenceService, private absenceDefinitionService: AbsenceDefinitionService, private router: Router, private route: ActivatedRoute, private messageService: MessageService) {
+  constructor(private absenceService: AbsenceService, private absenceDefinitionService: AbsenceDefinitionService, private userService: UserService, private router: Router, private route: ActivatedRoute, private messageService: MessageService) {
     this.absenceId = this.route.snapshot.paramMap.get('id') || "";
     this.absence = new AbsenceUpdateDto();
+    this.user = new UserDto();
 
     this.absenceDefinitionList = [];
     this.selectedAbsenceDefinition = new AbsenceDefinitionDto();
@@ -47,6 +51,7 @@ export class AbsenceEditComponent {
         this.partialTimeTo = moment(this.absence.PartialTimeTo?.substring(0, 19)).toDate();
 
         this.loadCurrentAbsenceDefinition();
+        this.loadUser();
       },
       error: err => {
         let detail: string = '';
@@ -93,6 +98,24 @@ export class AbsenceEditComponent {
         this.messageService.add({severity: 'error', summary: 'Error during load absence', detail});
       }
     })
+  }
+
+  loadUser() {
+    this.userService.getById(this.absence.UserId || "").subscribe({
+      next: response => {
+        this.user = response;
+      },
+      error: err => {
+        let detail: string = '';
+        if(err.status === 401) {
+          detail = 'Authentication needed';
+        } else if(err.status === 400) {
+          detail = err.error.error;
+        }
+
+        this.messageService.add({severity: 'error', summary: 'Error during load user', detail});
+      }
+    });
   }
 
   onSave() {
