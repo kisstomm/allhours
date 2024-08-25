@@ -31,4 +31,9 @@ export class UserService {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'Bearer ' + this.loadToken());
     return this.httpClient.get<UserDto[]>(this.baseUrl + "/Users", { headers: this.httpOptions.headers });
   }
+
+  create(user: UserDto) {
+    const body = JSON.stringify(user);
+    return this.httpClient.post<UserDto>(this.baseUrl + "/Users", body, { headers: this.httpOptions.headers });
+  }
 }
