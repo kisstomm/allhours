@@ -42,7 +42,14 @@ export class UserCreateComponent {
             this.messageService.add({severity: 'success', summary: 'User created', detail: ''});
           },
           error: err => {
-            this.messageService.add({severity: 'error', summary: 'Error during user creation', detail: ''});
+            let detail: string = '';
+            if(err.status === 401) {
+              detail = 'Authentication needed';
+            } else if(err.status === 400) {
+              detail = err.error.error;
+            }
+
+            this.messageService.add({severity: 'error', summary: 'Error during user creation', detail});
           }
         })
       } catch (e) {

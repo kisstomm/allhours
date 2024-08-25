@@ -11,7 +11,7 @@ export class UserService {
   httpOptions: { headers: HttpHeaders, params: HttpParams, responseType: string };
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = "https://api4.allhours.com/api/v1/";
+    this.baseUrl = "https://api4.allhours.com/api/v1";
 
     this.httpOptions = {
       headers: new HttpHeaders(),
