@@ -54,12 +54,11 @@
   <tr>
     <td>Absence</td>
     <td>
-
-<p-dropdown
-  [options]="absenceDefinitionList"
-  [(ngModel)]="selectedAbsenceDefinition"
-  optionLabel="Name"
-  placeholder="Select an Absence" />
+      <p-dropdown
+        [(ngModel)]="selectedAbsenceDefinition"
+        [options]="absenceDefinitionList"
+        optionLabel="Name"
+        placeholder="Select an Absence"/>
     </td>
   </tr>
   <tr>

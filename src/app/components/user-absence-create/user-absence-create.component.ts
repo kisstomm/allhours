@@ -24,8 +24,6 @@ export class UserAbsenceCreateComponent {
   partialTimeFrom: string;
   partialTimeTo: string;
 
-
-
   constructor(private userService: UserService, private absenceService: AbsenceService, private absenceDefinitionService: AbsenceDefinitionService, private router: Router, private route: ActivatedRoute, private messageService: MessageService) {
     this.userId = this.route.snapshot.paramMap.get('id') || "";
     this.user = new UserDto();
