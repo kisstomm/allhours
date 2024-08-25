@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {UserService} from "../../service/user.service";
 import {MessageService} from "primeng/api";
 import {UserDto} from "../../dto/UserDto";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-list',
@@ -12,7 +13,7 @@ export class UserListComponent {
   items: UserDto[];
   isLoading: boolean;
 
-  constructor(private userService: UserService, private messageService: MessageService) {
+  constructor(private userService: UserService, private router: Router, private messageService: MessageService) {
     this.items = [];
     this.isLoading = false;
     this.getUsers();
@@ -34,5 +35,9 @@ export class UserListComponent {
         this.isLoading = false;
       }
     })
+  }
+
+  onAddAbsence(userId: string) {
+    this.router.navigate(['/user-absence-create/', userId]);
   }
 }

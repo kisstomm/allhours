@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'settings', component: SettingsComponent},
   {path: 'user-list', component: UserListComponent},
   {path: 'user-create', component: UserCreateComponent},
-  {path: 'user-absence-create', component: UserAbsenceCreateComponent}
+  {path: 'user-absence-create/:id', component: UserAbsenceCreateComponent}
 ];
 
 @NgModule({
