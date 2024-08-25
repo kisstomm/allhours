@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {UserService} from "../../service/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserDto} from "../../dto/UserDto";
@@ -74,8 +74,6 @@ export class UserAbsenceCreateComponent {
   }
 
   onSave() {
-    this.validateFields();
-    if (!this.hasFieldsErrors()) {
       try {
         this.createAbsence.UserId = this.userId;
         this.createAbsence.Timestamp = moment(new Date()).format('YYYY-MM-DDTHH:mm:ss');
@@ -98,15 +96,6 @@ export class UserAbsenceCreateComponent {
       } catch (e) {
         this.messageService.add({severity: 'error', summary: 'Error during absence creation', detail: ''});
       }
-    }
-  }
-
-  private validateFields() {
-
-  }
-
-  private hasFieldsErrors() {
-    return false;
   }
 
   onPartialTimeFromChange() {
