@@ -10,24 +10,28 @@ import {UserDto} from "../../dto/UserDto";
 })
 export class UserListComponent {
   items: UserDto[];
+  isLoading: boolean;
 
   constructor(private userService: UserService, private messageService: MessageService) {
     this.items = [];
+    this.isLoading = false;
     this.getUsers();
   }
 
   getUsers() {
+    this.isLoading = true;
     this.userService.getAll().subscribe({
       next: data => {
         this.items = data;
+        this.isLoading = false;
       },
       error: err => {
-        console.log(err);
         let detail: string = '';
         if(err.status === 401) {
           detail = 'Authentication needed';
         }
         this.messageService.add({severity: 'error', summary: 'Error during load users', detail});
+        this.isLoading = false;
       }
     })
   }
