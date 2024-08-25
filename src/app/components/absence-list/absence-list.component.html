@@ -1,0 +1,100 @@
+<h1>Absences</h1>
+
+<table>
+  <tr>
+    <td>Absence from</td>
+    <td>
+      <p-calendar
+        [(ngModel)]="absenceFrom"
+        (ngModelChange)="onAbsenceFromChange()"
+        [showIcon]="true"
+        [showButtonBar]="true"
+        [showOnFocus]="false"
+        [showTime]="false"
+        dateFormat="yy.mm.dd"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td>Absence to</td>
+    <td>
+      <p-calendar
+        [(ngModel)]="absenceTo"
+        (ngModelChange)="onAbsenceToChange()"
+        [showIcon]="true"
+        [showButtonBar]="true"
+        [showOnFocus]="false"
+        [showTime]="false"
+        dateFormat="yy.mm.dd"
+      />
+    </td>
+  </tr>
+</table>
+
+<p-table
+  [loading]="isLoading"
+  [paginator]="true"
+  [rowsPerPageOptions]="[5, 10, 20]"
+  [rows]="5"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  [value]="items"
+  styleClass="p-datatable-striped"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="Id">Id
+        <p-sortIcon field="Id"/>
+      </th>
+      <th pSortableColumn="FirstName">FirstName
+        <p-sortIcon field="FirstName"/>
+      </th>
+      <th pSortableColumn="LastName">LastName
+        <p-sortIcon field="LastName"/>
+      </th>
+      <th pSortableColumn="PartialTimeFrom">PartialTimeFrom
+        <p-sortIcon field="PartialTimeFrom"/>
+      </th>
+      <th pSortableColumn="PartialTimeTo">PartialTimeTo
+        <p-sortIcon field="PartialTimeTo"/>
+      </th>
+      <th pSortableColumn="Timestamp">Timestamp
+        <p-sortIcon field="Timestamp"/>
+      </th>
+      <th>Actions</th>
+      <th>
+        <p-button icon="pi pi-plus" routerLink="/user-create" styleClass="p-button-sm"></p-button>
+      </th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>
+        <p-columnFilter
+          field="FirstName"
+          placeholder="Search by FirstName"
+          type="text"
+        />
+      </th>
+      <th>
+        <p-columnFilter
+          field="LastName"
+          placeholder="Search by LastName"
+          type="text"
+        />
+      </th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template let-item pTemplate="body">
+    <tr>
+      <td>{{ item.Id }}</td>
+      <td>{{ item.FirstName }}</td>
+      <td>{{ item.LastName }}</td>
+      <td>{{ item.PartialTimeFrom }}</td>
+      <td>{{ item.PartialTimeTo }}</td>
+      <td>{{ item.Timestamp }}</td>
+      <td><p-button label="Edit absence" [routerLink]="['/absence-edit/', item.Id]" [outlined]="true"/></td>
+    </tr>
+  </ng-template>
+</p-table>

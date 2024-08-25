@@ -1,4 +1,5 @@
-<h1>Add absence</h1>
+<h1>Absence edit</h1>
+
 <p-accordion [activeIndex]="0">
   <p-accordionTab header="User">
     <table>
@@ -65,7 +66,7 @@
     <td>Origin</td>
     <td>
       <p-inputNumber
-        [(ngModel)]="createAbsence.Origin"
+        [(ngModel)]="absence.Origin"
         [min]="0"
         [showButtons]="true"
         mode="decimal"/>
@@ -74,7 +75,7 @@
   <tr>
     <td>Comment</td>
     <td>
-      <input [(ngModel)]="createAbsence.Comment"
+      <input [(ngModel)]="absence.Comment"
              id="comment"
              pInputText
              placeholder="Type comment"
@@ -114,7 +115,7 @@
     <td>Partial time duration</td>
     <td>
       <p-inputNumber
-        [(ngModel)]="createAbsence.PartialTimeDuration"
+        [(ngModel)]="absence.PartialTimeDuration"
         [min]="0"
         [showButtons]="true"
         mode="decimal"/>
@@ -124,7 +125,7 @@
     <td>Is partial</td>
     <td>
       <p-checkbox
-        [(ngModel)]="createAbsence.IsPartial"
+        [(ngModel)]="absence.IsPartial"
         [binary]="true"
       />
     </td>
@@ -133,12 +134,13 @@
     <td>Override holiday absence</td>
     <td>
       <p-checkbox
-        [(ngModel)]="createAbsence.OverrideHolidayAbsence"
+        [(ngModel)]="absence.OverrideHolidayAbsence"
         [binary]="true"
       />
     </td>
   </tr>
 </table>
+
 
 <div class="mt-5">
   <p-button (onClick)="onSave()" label="Save"></p-button>&nbsp;
