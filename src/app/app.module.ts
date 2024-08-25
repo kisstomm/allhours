@@ -17,13 +17,15 @@ import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
 import {UserListComponent} from './components/user-list/user-list.component';
 import {TableModule} from "primeng/table";
+import { UserCreateComponent } from './components/user-create/user-create.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SettingsComponent,
     HomeComponent,
-    UserListComponent
+    UserListComponent,
+    UserCreateComponent
   ],
   imports: [
     BrowserModule,
