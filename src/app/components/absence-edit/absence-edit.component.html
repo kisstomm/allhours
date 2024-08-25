@@ -1,1 +1,97 @@
-<p>absence-edit works!</p>
+<h1>Absence edit</h1>
+
+<table>
+  <tr>
+    <td>Absence</td>
+    <td>
+      <p-dropdown
+        [(ngModel)]="selectedAbsenceDefinition"
+        [options]="absenceDefinitionList"
+        optionLabel="Name"
+        placeholder="Select an Absence"/>
+    </td>
+  </tr>
+  <tr>
+    <td>Origin</td>
+    <td>
+      <p-inputNumber
+        [(ngModel)]="absence.Origin"
+        [min]="0"
+        [showButtons]="true"
+        mode="decimal"/>
+    </td>
+  </tr>
+  <tr>
+    <td>Comment</td>
+    <td>
+      <input [(ngModel)]="absence.Comment"
+             id="comment"
+             pInputText
+             placeholder="Type comment"
+             type="text"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td>Partial time from</td>
+    <td>
+      <p-calendar
+        [(ngModel)]="partialTimeFrom"
+        (ngModelChange)="onPartialTimeFromChange()"
+        [showIcon]="true"
+        [showOnFocus]="false"
+        [showTime]="true"
+        dateFormat="yy.mm.dd"
+        hourFormat="24"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td>Partial time to</td>
+    <td>
+      <p-calendar
+        [(ngModel)]="partialTimeTo"
+        (ngModelChange)="onPartialTimeToChange()"
+        [showIcon]="true"
+        [showOnFocus]="false"
+        [showTime]="true"
+        dateFormat="yy.mm.dd"
+        hourFormat="24"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td>Partial time duration</td>
+    <td>
+      <p-inputNumber
+        [(ngModel)]="absence.PartialTimeDuration"
+        [min]="0"
+        [showButtons]="true"
+        mode="decimal"/>
+    </td>
+  </tr>
+  <tr>
+    <td>Is partial</td>
+    <td>
+      <p-checkbox
+        [(ngModel)]="absence.IsPartial"
+        [binary]="true"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td>Override holiday absence</td>
+    <td>
+      <p-checkbox
+        [(ngModel)]="absence.OverrideHolidayAbsence"
+        [binary]="true"
+      />
+    </td>
+  </tr>
+</table>
+
+
+<div class="mt-5">
+  <p-button (onClick)="onSave()" label="Save"></p-button>&nbsp;
+  <p-button routerLink="/" icon="pi pi-times" label="Cancel"></p-button>
+</div>
