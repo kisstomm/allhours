@@ -103,6 +103,7 @@ export class AbsenceEditComponent {
       this.absenceService.update(this.absence).subscribe({
         next: response => {
           this.messageService.add({severity: 'success', summary: 'Absence created', detail: ''});
+          this.loadAbsence();
         },
         error: err => {
           let detail: string = '';
