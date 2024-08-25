@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserDto} from "../dto/UserDto";
+import {AbsenceDto} from "../dto/AbsenceDto";
+import {AbsenceCreateDto} from "../dto/AbsenceCreateDto";
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +29,15 @@ export class AbsenceService {
     return localStorage.getItem('token') || "";
   }
 
-  getAll(): Observable<UserDto[]> {
+  getAll(): Observable<AbsenceDto[]> {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'Bearer ' + this.loadToken());
-    return this.httpClient.get<UserDto[]>(this.baseUrl + "/Users", { headers: this.httpOptions.headers });
+    return this.httpClient.get<AbsenceDto[]>(this.baseUrl + "/Absences", { headers: this.httpOptions.headers });
+  }
+
+  create(absence: AbsenceCreateDto) {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'Bearer ' + this.loadToken());
+
+    const body = JSON.stringify(absence);
+    return this.httpClient.post<UserDto>(this.baseUrl + "/Absences", body, { headers: this.httpOptions.headers });
   }
 }

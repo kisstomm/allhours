@@ -37,6 +37,7 @@ export class UserCreateComponent {
     this.validateFields();
     if (!this.hasFieldsErrors()) {
       try {
+
         this.userService.create(this.user).subscribe({
           next: response => {
             this.messageService.add({severity: 'success', summary: 'User created', detail: ''});

@@ -21,6 +21,9 @@ import { UserCreateComponent } from './components/user-create/user-create.compon
 import { UserAbsenceCreateComponent } from './components/user-absence-create/user-absence-create.component';
 import {AccordionModule} from "primeng/accordion";
 import {DropdownModule} from "primeng/dropdown";
+import {InputNumberModule} from "primeng/inputnumber";
+import {CalendarModule} from "primeng/calendar";
+import {CheckboxModule} from "primeng/checkbox";
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import {DropdownModule} from "primeng/dropdown";
     ToastModule,
     TableModule,
     AccordionModule,
-    DropdownModule
+    DropdownModule,
+    InputNumberModule,
+    CalendarModule,
+    CheckboxModule
   ],
   providers: [
     MessageService
