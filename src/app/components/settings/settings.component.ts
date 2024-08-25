@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {MessageService} from "primeng/api";
 import {TokenService} from "../../service/token.service";
+import {Validator} from "../../helper/validator";
 
 @Component({
   selector: 'app-settings',
@@ -20,13 +21,13 @@ export class SettingsComponent {
   }
 
   onClientIdChange() {
-    const isError: boolean = this.clientId === "" || this.clientId === null;
+    const isError: boolean = Validator.isEmpty(this.clientId)
     this.isShowError.set('clientId', isError);
 
   }
 
   onClientSecretChange() {
-    const isError: boolean = this.clientSecret === "" || this.clientSecret === null;
+    const isError: boolean = Validator.isEmpty(this.clientSecret);
     this.isShowError.set('clientSecret', isError);
   }
 

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {UserDto} from "../../dto/UserDto";
 import {UserService} from "../../service/user.service";
-import {Router} from "@angular/router";
 import {MessageService} from "primeng/api";
+import {Validator} from "../../helper/validator";
 
 @Component({
   selector: 'app-user-create',
@@ -13,23 +13,23 @@ export class UserCreateComponent {
   user: UserDto;
   isShowError: Map<string, boolean>;
 
-  constructor(private userService: UserService, private router: Router, private messageService: MessageService) {
+  constructor(private userService: UserService, private messageService: MessageService) {
     this.user = new UserDto();
     this.isShowError = new Map<string, boolean>;
   }
 
   onFirstNameChange() {
-    const isError: boolean = this.user.FirstName === "" || this.user.FirstName === null || this.user.FirstName === undefined;
+    const isError: boolean = Validator.isEmpty(this.user.FirstName);
     this.isShowError.set('firstName', isError);
   }
 
   onLastNameChange() {
-    const isError: boolean = this.user.LastName === "" || this.user.LastName === null|| this.user.LastName === undefined;
+    const isError: boolean = Validator.isEmpty(this.user.LastName);
     this.isShowError.set('lastName', isError);
   }
 
   onEmailChange() {
-    const isError: boolean = this.user.Email === "" || this.user.Email === null|| this.user.Email === undefined;
+    const isError: boolean = Validator.isEmpty(this.user.Email);
     this.isShowError.set('email', isError);
   }
 
